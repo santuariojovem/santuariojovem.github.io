@@ -274,7 +274,7 @@ h1 {
     width: 25vw;
     height: 400px;
     background-color: #333333;
-    padding: 15px 25px;
+    padding: 15px 22px 22px 22px;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -413,6 +413,10 @@ i:not(.ri-arrow-left-s-line, .ri-arrow-right-s-line) {
 .ri-arrow-left-s-line {
     position: relative;
     left: 22px;
+}
+
+.card__content {
+    padding-bottom: initial;
 }
 
 @media (max-width: 1024px) {
