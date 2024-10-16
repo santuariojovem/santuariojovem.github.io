@@ -233,7 +233,7 @@ main {
 #boxCoordenadores {
     margin: 0 auto;
     margin-top: 120px;
-    width: 80vw;
+    width: 90vw;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
