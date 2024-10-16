@@ -496,6 +496,7 @@ i:not(.ri-arrow-left-s-line, .ri-arrow-right-s-line) {
 
     #containerCoordenadores h1 {
         text-align: center;
+        font-size: 2 rem;
     }
 
     #boxCoordenadores {
@@ -504,7 +505,7 @@ i:not(.ri-arrow-left-s-line, .ri-arrow-right-s-line) {
 
     .itemCoordenadores {
         margin-bottom: 45px;
-        width: 90%;
+        width: 100%;
         height: auto;
     }
 
