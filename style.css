@@ -200,7 +200,7 @@ main {
 }
 
 #duvidas-frequentes {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     color: white;
     font-weight: bold;
     position: absolute;
@@ -580,6 +580,21 @@ i:not(.ri-arrow-left-s-line, .ri-arrow-right-s-line) {
 
     .logos img {
         margin: -10px;
+    }
+
+    #containerCoordenadores h1 {
+        font-size: 2.4rem;
+    }
+
+    .filtro-container div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .filtro-container div label {
+        margin-bottom: 15px
     }
 }
 
