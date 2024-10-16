@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria de Fotos - Santuário Jovem</title>
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/Meedeiros17/imgsSantuarioJovem.github.io/refs/heads/main/favicon_SJ.png" type="image/x-icon"> 
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #galeria {
+            padding: 50px 0;
+            display: flex;
+            justify-content: center;
+            min-width: 90vw;
+        }
+
+        #containerLinks {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            width: 90%;
+        }
+
+        .cardLink {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cardLink:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .cardLink img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .cardLink p {
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 10px 0;
+            color: #333;
+        }
+
+        .cardLink a {
+            position: relative;
+        }
+
+        .cardLink a div {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cardLink a div i {
+            color: #333;
+            position: absolute;
+            right: 1.3vw;
+            display: none;
+        }
+
+        @keyframes show {
+            0% {
+                transform: translateY(10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .show {
+            animation: show .2s ease-in-out;
+        }
+
+        .cardLink a:hover i {
+            display: block;
+        }
+
+        @media (max-width:1700px) {
+            #containerLinks {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width:1400px) {
+            #containerLinks {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width:930px) {
+            #containerLinks {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            #galeria {
+                min-width: initial;
+                max-width: 600px;
+                width: 70vw;
+            }
+        }
+
+        label {
+            color: white;
+        }
+
+        .filtro-container {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-bottom: 10px;
+            margin-top: 40px;
+        }
+
+        .filtro {
+            margin: 0 10px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .filtro-container {
+            position: relative;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .filtro {
+            appearance: none;
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #5C5C5c;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: .95rem;
+            font-family: Roboto, sans-serif;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .filtro:hover {
+            background-color: #444;
+        }
+
+        .filtro:focus {
+            outline: none;
+            border-color: #d9d9d9;
+        }
+
+        main {
+            background-color: #242424;
+            min-height: 80vh;
+            margin-bottom: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 2.6rem;
+            margin-top: 45px;
+            margin-bottom: 50px;
+            text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <header id="inicio">
+        <a href="https://santuarioscj.com.br/scj/" class="headerItem" target="_blank">
+            <img src="https://raw.githubusercontent.com/Meedeiros17/imgsSantuarioJovem.github.io/refs/heads/main/logoSCJ.png"
+                alt="Logo Santuário SCJ" class="headerItem pointer logoSCJ pc">
+        </a>
+        <a href="index.html" style="display: flex; justify-content: center">
+            <img src="https://raw.githubusercontent.com/Meedeiros17/imgsSantuarioJovem.github.io/refs/heads/main/logoSJExp.png"
+                alt="Logo Santuário Jovem" class="headerItem logoSJ">
+        </a>
+    </header>
+
+    <main>
+        <h1>Galeria de Fotos Santuário Jovem</h1>
+        <!-- Filtros -->
+        <div class="filtro-container">
+            <div>
+                <label for="evento">Filtrar por Evento:</label>
+                <select id="evento" class="filtro">
+                    <option value="">Todos</option>
+                    <option value="Missa Jovem">Missa Jovem</option>
+                    <option value="Grupo">Grupo</option>
+                    <option value="Reconecta">Reconecta</option>
+                    <option value="Conferência Dehoniana">Conferência Dehoniana</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="ordenar">Ordenar por Data:</label>
+                <select id="ordenar" class="filtro">
+                    <option value="mais-recentes" selected>Mais Recentes</option>
+                    <option value="mais-antigos">Mais Antigos</option>
+                </select>
+            </div>
+        </div>
+
+
+        <!-- Galeria -->
+        <section id="galeria">
+            <div id="containerLinks">
+
+
+                <!-- MISSAS JOVEM -->
+
+
+                <!-- <div class="cardLink missa-jovem" data-evento="Missa Jovem" data-data="2024-03-01">
+                    <a href="" target="_blank">
+                        <img src="https://raw.githubusercontent.com/Meedeiros17/imgsSantuarioJovem.github.io/refs/heads/main/missa-jovem-marco.jpg" alt="Descrição da imagem">
+                        <div>
+                            <p>Missa Jovem - Março</p>
+                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="cardLink missa-jovem" data-evento="Missa Jovem" data-data="2024-04-01">
+                    <a href="" target="_blank">
+                        <img src="https://raw.githubusercontent.com/Meedeiros17/imgsSantuarioJovem.github.io/refs/heads/main/missa-jovem-abril.jpg" alt="Descrição da imagem">
+                        <div>
+                            <p>Missa Jovem - Abril</p>
+                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div> -->
+                <div class="cardLink missa-jovem" data-evento="Missa Jovem" data-data="2024-05-01">
+                    <a href="https://drive.google.com/drive/folders/1-kgwQHA4a1qBP6Krs7o7rsqnPgPyEnQo" target="_blank">
+                        <img src="https://raw.githubusercontent.com/Meedeiros17/imgsSantuarioJovem.github.io/refs/heads/main/missa-jovem-maio.jpg" alt="Descrição da imagem">
+                        <div>
+                            <p>Missa Jovem - Maio</p>
+                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="cardLink missa-jovem" data-evento="Missa Jovem" data-data="2024-06-01">
+                    <a href="https://drive.google.com/drive/folders/1-sUdFXiN0i8hlJQZmZ0NJbqn0PDL-IhM" target="_blank">
+                        <img src="https://raw.githubusercontent.com/Meedeiros17/imgsSantuarioJovem.github.io/refs/heads/main/missa-jovem-junho.jpg" alt="Descrição da imagem">
+                        <div>
+                            <p>Missa Jovem - Junho</p>
+                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="cardLink missa-jovem" data-evento="Missa Jovem" data-data="2024-07-01">
+                    <a href="https://drive.google.com/drive/folders/1-t6zss1cc8kZY4JwK1aBn3ZZIRM8FtK-" target="_blank">
+                        <img src="https://raw.githubusercontent.com/Meedeiros17/imgsSantuarioJovem.github.io/refs/heads/main/missa-jovem-julho.jpg" alt="Descrição da imagem">
+                        <div>
+                            <p>Missa Jovem - Julho</p>
+                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="cardLink missa-jovem" data-evento="Missa Jovem" data-data="2024-08-01">
+                    <a href="https://drive.google.com/drive/folders/10Lj1Z0Qq6onba3KZFSAo_8hLkxODHx0b" target="_blank">
+                        <img src="https://raw.githubusercontent.com/Meedeiros17/imgsSantuarioJovem.github.io/refs/heads/main/missa-jovem-agosto.jpg" alt="Descrição da imagem">
+                        <div>
+                            <p>Missa Jovem - Agosto</p>
+                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="cardLink missa-jovem" data-evento="Missa Jovem" data-data="2024-09-01">
+                    <a href="https://drive.google.com/drive/folders/10Wd7PSd-Uis6JPhxVXA5HwPFqadpV6qJ" target="_blank">
+                        <img src="https://raw.githubusercontent.com/Meedeiros17/imgsSantuarioJovem.github.io/refs/heads/main/missa-jovem-setembro.jpg" alt="Descrição da imagem">
+                        <div>
+                            <p>Missa Jovem - Setembro</p>
+                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="cardLink missa-jovem" data-evento="Missa Jovem" data-data="2024-10-04">
+                    <a href="https://drive.google.com/drive/folders/10ZX8-cexczHRkx3tdYgsSkwowakIvxBU" target="_blank">
+                        <img src="https://raw.githubusercontent.com/Meedeiros17/imgsSantuarioJovem.github.io/refs/heads/main/missa-jovem-outubro.jpg" alt="Descrição da imagem">
+                        <div>
+                            <p>Missa Jovem - Outubro</p>
+                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div>
+
+
+                <!-- EVENTOS -->
+
+
+                <div class="cardLink grupo" data-evento="Reconecta" data-data="2024-09-28">
+                    <a href="https://drive.google.com/drive/folders/17PrVxM4mfVbzpJxdazKZ0DjpDjiIsdpX" target="_blank">
+                        <img src="https://raw.githubusercontent.com/Meedeiros17/imgsSantuarioJovem.github.io/refs/heads/main/reconecta-2k24.jpg" alt="Descrição da imagem">
+                        <div>
+                            <p>Reconecta 2K24</p>
+                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="cardLink grupo" data-evento="Conferência Dehoniana" data-data="2024-09-12">
+                    <a href="https://drive.google.com/drive/folders/1REVVMs7rfoVTUFMW4zfx70YlmnCYlVsj?hl=pt-BR"
+                        target="_blank">
+                        <img src="https://raw.githubusercontent.com/Meedeiros17/imgsSantuarioJovem.github.io/refs/heads/main/conferencia-curitiba.jpg" alt="Descrição da imagem">
+                        <div>
+                            <p>Conferência - Curitiba</p>
+                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div>
+
+
+                <!-- GRUPOS -->
+
+
+<!--            <div class="cardLink grupo" data-evento="Grupo" data-data="2024-01-13">
+                    <a href="https://drive.google.com/drive/folders/1-M6gxLu2yveID7VwHfRE9dN17EL-tQZ2?usp=drive_link" target="_blank">
+                        <img src="https://raw.githubusercontent.com/Meedeiros17/imgsSantuarioJovem.github.io/refs/heads/main/slide1.jpg" alt="Descrição da imagem">
+                        <div>
+                            <p>Grupo - 13/01/2024</p>
+                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="cardLink grupo" data-evento="Grupo" data-data="2024-01-20">
+                    <a href="https://drive.google.com/drive/folders/1-M6gxLu2yveID7VwHfRE9dN17EL-tQZ2?usp=drive_link" target="_blank">
+                        <img src="https://raw.githubusercontent.com/Meedeiros17/imgsSantuarioJovem.github.io/refs/heads/main/slide1.jpg" alt="Descrição da imagem">
+                        <div>
+                            <p>Grupo - 20/01/2024</p>
+                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="cardLink grupo" data-evento="Grupo" data-data="2024-01-27">
+                    <a href="https://drive.google.com/drive/folders/1-M6gxLu2yveID7VwHfRE9dN17EL-tQZ2?usp=drive_link" target="_blank">
+                        <img src="https://raw.githubusercontent.com/Meedeiros17/imgsSantuarioJovem.github.io/refs/heads/main/slide1.jpg" alt="Descrição da imagem">
+                        <div>
+                            <p>Grupo - 27/01/2024</p>
+                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="cardLink grupo" data-evento="Grupo" data-data="2024-02-03">
+                    <a href="https://drive.google.com/drive/folders/1-M6gxLu2yveID7VwHfRE9dN17EL-tQZ2?usp=drive_link" target="_blank">
+                        <img src="https://raw.githubusercontent.com/Meedeiros17/imgsSantuarioJovem.github.io/refs/heads/main/slide1.jpg" alt="Descrição da imagem">
+                        <div>
+                            <p>Grupo - 03/02/2024</p>
+                            <i class="fa fa-external-link" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div> -->
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        ordenar();
+
+        document.getElementById('evento').addEventListener('change', filtrar);
+        document.getElementById('ordenar').addEventListener('change', ordenar);
+
+        function filtrar() {
+            const eventoSelecionado = document.getElementById('evento').value;
+            const cards = document.querySelectorAll('.cardLink');
+
+            cards.forEach(card => {
+                if (eventoSelecionado === "" || card.dataset.evento === eventoSelecionado) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            ordenar();
+        }
+
+        function ordenar() {
+            const container = document.getElementById('containerLinks');
+            const cards = Array.from(container.children);
+            const ordem = document.getElementById('ordenar').value;
+
+            cards.sort((a, b) => {
+                const dataA = new Date(a.dataset.data);
+                const dataB = new Date(b.dataset.data);
+
+                return ordem === "mais-recentes" ? dataB - dataA : dataA - dataB;
+            });
+
+            // Remover todos os cards do container
+            container.innerHTML = '';
+
+            // Adicionar os cards na nova ordem
+            cards.forEach(card => container.appendChild(card));
+        }
+
+        // Seleciona todos os links de cards
+        const cardLinks = document.querySelectorAll('.cardLink a');
+
+        // Adiciona o evento de 'mouseover' para cada link
+        cardLinks.forEach(cardLink => {
+            cardLink.addEventListener('mouseover', () => {
+                cardLink.querySelector('i').classList.add('show');
+            });
+
+            // Remove a classe 'show' ao remover o mouse de cima do card
+            cardLink.addEventListener('mouseout', () => {
+                cardLink.querySelector('i').classList.remove('show');
+            });
+        });
+
+
+    </script>
+    <script src="https://kit.fontawesome.com/ede55d3ae8.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
